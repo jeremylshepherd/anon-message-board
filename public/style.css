@@ -1,0 +1,73 @@
+:root {
+  --transition: all 350ms;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  padding: 10px;
+}
+
+#toggle {
+  display: none;
+}
+
+#toggle + label::before {
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900; 
+  content: "\f067";
+  transition: var(--transition);
+  position: absolute;
+  top: 142px;
+  left: 80px;
+  font-size: 18px;
+}
+
+#toggle ~ #userstories {
+  max-height: 20px;
+  overflow: hidden;
+  margin-left: 5%;
+  margin-top: 5%;
+  transition: var(--transition);
+}
+
+#toggle:checked + label::before {
+  transform: rotate(225deg);
+}
+
+#toggle:checked ~ #userstories {
+  max-height: 600px;
+}
+
+.replies {
+  margin-left: 50px;
+}
+
+.reply {
+  border: 1px dotted black;
+  margin: 5px;
+  padding: 5px;
+}
+
+.newReply {
+  margin: 10px 5px 10px 5px;
+}
+
+.thread {
+  border: 2px solid black;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.id {
+  font-size: 10.5px;
+}
+
+#submitNewThread {
+  margin: 50px;
+}
