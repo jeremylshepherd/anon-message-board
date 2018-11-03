@@ -44,7 +44,7 @@ module.exports = function(app) {
 
     .post(async (req, res) => {
       try {
-        let thread = await Thread.create({ ...req.body, ...req.params });
+        let thread = await Thread.create(Object.assign({}, req.body, req.params ));
         res.json(thread);
       } catch (e) {
         return handleError(res, e);
@@ -102,7 +102,7 @@ module.exports = function(app) {
 
     .post((req, res) => {
       Thread.findOne({ _id: req.body.thread_id }, (err, thread) => {
-        if (err) handleError(res, err);
+        if (err) return handleError(res, err);
         if (!thread) return res.status(400).send('That thread does not exist');
         let reply = new Reply({
           text: req.body.text,
@@ -110,7 +110,7 @@ module.exports = function(app) {
           delete_password: req.body.delete_password
         });
         reply.save((err, record) => {
-          if (err) handleError(res, err);
+          if (err) return handleError(res, err);
           thread.replies.push(reply._id);
           thread.save();
           res.json(record);

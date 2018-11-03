@@ -13,6 +13,8 @@ var runner            = require('./test-runner');
 
 var app = express();
 
+require('dotenv').load();
+
 app.use(helmet());
 
 app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
@@ -32,7 +34,8 @@ if(process.env.NODE_ENV == 'test') {
     let body = JSON.stringify(req.body);
     let query = JSON.stringify(req.query);
     let params = JSON.stringify(req.params);
-    let response = JSON.stringify({...res.body, ...res.status, ...res.headers}, null, 2);
+    let response = JSON.stringify(Object.assign({},res.body, res.status, res.headers), null, 2);
+    console.log(response);
     console.log(`${meth} ${path} - ${body} ${query} ${params}`);
     next();
   });
