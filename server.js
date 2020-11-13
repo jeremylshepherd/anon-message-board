@@ -13,7 +13,7 @@ var runner            = require('./test-runner');
 
 var app = express();
 
-require('dotenv').load();
+require('dotenv').config();
 
 app.use(helmet());
 
