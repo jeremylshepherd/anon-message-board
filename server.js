@@ -13,6 +13,8 @@ var runner            = require('./test-runner');
 
 var app = express();
 
+require('dotenv').config();
+
 app.use(helmet());
 
 app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
@@ -38,6 +40,7 @@ if(process.env.NODE_ENV == 'test') {
   });
 }
 
+console.log(process.env.MONGODB_URI);
 mongoose.connect(
     process.env.MONGODB_URI,
     (err, db) => {
